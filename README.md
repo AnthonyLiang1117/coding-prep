@@ -1,2 +1,2 @@
 # coding-prep
-Practicing algorithms and data structures
+Practicing algorithms and data structures 🌱
