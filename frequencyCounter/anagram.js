@@ -21,7 +21,7 @@ Given 2 strings, write a function to determine if the second string is an anagra
 */
 
 function validAnagram(string1, string2) {
-  // checks if strings are the same length, if not, return false
+  // checks if strings are the same length, if not, return false O(1)
   if (string1.length !== string2.length) {
     return false;
   }
@@ -56,3 +56,15 @@ function validAnagram(string1, string2) {
 }
 
 console.log(validAnagram('aaz', 'azz'));
+
+/*
+
+Time complexity: O(n)
+- because most of our actions are arithmetic, like assigning and adding, so those equivalate constant O(1)
+- the other actions are 3 individual loops so O(3n) becomes O(n)
+
+Space complexity: O(n)
+- creating a variable that is a reference type is O(n)
+- we created 2 new variables that are objects which would equal to O(2n) becomes O(n)
+
+*/
