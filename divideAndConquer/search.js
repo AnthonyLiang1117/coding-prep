@@ -50,7 +50,7 @@ const search = (array, value) => {
 }
 
 /*
-Time Complexity: O(n)
+Time Complexity: O(log n)
 - since we will be only using one while loop, it becomes O(n)
 
 Space Complexity: O(1)
