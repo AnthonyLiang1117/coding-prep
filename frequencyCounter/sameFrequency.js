@@ -16,6 +16,7 @@ sameFrequency(3589578, 5879385) => true
 sameFrequency(22,222) => false
 
 Approach / Code:
+use map / frequency approach
 use for of loop for arrays!!
 use for in loops for objects!!
 */

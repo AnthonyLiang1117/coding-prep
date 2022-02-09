@@ -14,6 +14,7 @@ areThereDuplicates(1,2,2) => true
 areThereDuplicates('a','b', 'c', 'a') => true
 
 Approach / Code:
+use map / frequency approach
 can use (...arg) to represent the variable number of arguments which will be an array
 use for of loop for arrays!!!
 */
