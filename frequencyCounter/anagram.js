@@ -7,6 +7,8 @@ Given 2 strings, write a function to determine if the second string is an anagra
   Create a function that has 2 inputs, both strings, to see if both words use the same letters in both strings
   return TRUE if they are an anagram of each other
   return FALSE if not
+  all lowercase so we do not need to worry about uppercase letters
+  all alphabet letters so no numbers, periods, punctation, spaces
 
   Examples:
   validAnagram('', '') // true
@@ -14,7 +16,7 @@ Given 2 strings, write a function to determine if the second string is an anagra
   validAnagram('aaz', 'zza') // false
   validAnagram('awesome', 'awesom') // false
 
-  Approach:
+  Approach / Code:
   Has to be same number of letters
   same length of both strings
   uses the same letter the same amount of times
