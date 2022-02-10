@@ -27,6 +27,7 @@ then we create a seperate loop that loops through the array
 
 function rainCollector (array){
   // create a variable that holds the amount of water you are going to collect
+
   // iterate through the array:
   // at each iteration, we want to find
   // 1) the max number where the array is from the beginning to the index your at
