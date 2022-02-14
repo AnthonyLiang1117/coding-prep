@@ -14,11 +14,19 @@ function linearSearch(array, value) {
   // loop through array
   for (let i = 0; i < array.length; ++i) {
     // if the current element we are on equals to the value, return the index
-    let element = array[i];
-    if (element === value) return i;
+    if (array[i] === value) return i;
   }
   // if we make it to the end of loop, return -1
   return -1;
 }
 
 console.log(linearSearch([1, 4, 3], 9));
+
+/*
+Time Complexity: O(n)
+- since it uses a for loop and everything else is just operators or returns, we can just simplify it down to linear time complexity O(n);
+- its O(n) since the time will be determined on how big the input is;
+
+Space Complexity: O(1)
+- since we are only assigning 1 variable with an arithemtic value, it is constant time complexity O(1)
+*/
