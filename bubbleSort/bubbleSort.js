@@ -1,6 +1,10 @@
 /*
 Restate:
 Create a function that does bubble sort given an array of numbers
+where goes through the array and for each iteration,
+it will check to see if the element in the current index is bigger than the next one
+if it is, it will swap, if not, it will keep going until the biggest number is at the end
+each iteration will keep going and eventually move the biggest numbers to the end
 
 Examples:
 bubbleSort([4,2,6,8,19]) => [2,4,6,8,19]

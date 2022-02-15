@@ -1,6 +1,9 @@
 /*
 Restate:
 Create a function that does selection sort
+where it takes an array and collect the smallest numbers at the beginning
+it will go through the array and check to see in each iteration which one is the minimum in the array
+once we figure out the minimum, we will swap it to the current index of where the array is
 
 Example:
 selectionSort([4,2,6,8,19]) => [2,4,6,8,19]
@@ -36,7 +39,7 @@ function swap(array, idx1, idx2) {
 console.log(selectionSort([9, 2, 1, 4, 65, 32, 42]));
 
 /*
-Time Complexity - O(n)
+Time Complexity - O(n^2)
 - since we have a nested for loop, that uses the input, input amount of times so thats quadratic time
 
 Space Complexity - O(1)
