@@ -16,8 +16,8 @@ Approach / Code:
 function insertionSort(array) {
   // loop through array and start at the 2nd item in the array to compare it with the first item
   for (let i = 1; i < array.length; i++) {
+    // as we go through the array, if the current value is less the value before,
     if (array[i] < array[i - 1]) {
-      // as we go through the array, if the current value is less the value before,
       // we will loop again from the current index to the end of the array
       for (let j = i; j > 0; j--) {
         // we will check if the current element is less than the element before it, and if it is, we swap
