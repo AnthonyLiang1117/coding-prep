@@ -1,6 +1,8 @@
 /*
 Restate:
 Create a function that implements mergeSort
+where we break up the input array into halves and keep halfing them until we get to indiviudal arrays
+after we merge them one array with one array at a time until we get to fully sorted array
 
 Example:
 mergeSort([4,2,6,8,19]) => [2,4,6,8,19]
@@ -45,4 +47,29 @@ function merge(array1, array2) {
   return mergedArray;
 }
 
-console.log(merge([2, 3, 4, 5], [1, 6, 8, 10]));
+console.log(merge([100], [1, 2, 3, 4, 5, 6]));
+
+function mergeSort(array) {
+  // base case that we want that will eventually help us break out of recursion
+  if (array <= 1) return array;
+
+  // break down array into halves and keep breaking them down until we get to the very bottom
+  let midpoint = Math.floor(array.length / 2);
+
+  // recalling of function in order to start the recursion but with a different output
+  let left = mergeSort(array.slice(0, midpoint));
+  let right = mergeSort(array.slice(midpoint));
+
+  // merge back the indivdual arrays using merge function until theres only 1 array and return array
+  return merge(left, right);
+}
+
+/*
+Time Complexity: O(n log n)
+- since we have to split up the input in half every time we run the function, this makes it logarithmic time log n
+- in every split, we have to make n number of comparsions in order to break it down into individual arrays which makes it linear time
+- O(n * log n) => O(n log n)
+
+Space Complexity: O(n)
+- since we will be creating n number of individual arrays based on the input size, this makes it linear space O(n)
+*/
