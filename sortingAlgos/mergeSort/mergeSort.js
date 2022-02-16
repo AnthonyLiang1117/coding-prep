@@ -12,6 +12,8 @@ mergeSort([9,2,1,4,65,32,42]) => [1,2,4,9,32,42,65]
 Approach / Code:
 Break it down to individual parts
 create merge function for merging 2 sorted arrays
+uses recursion in main function so once we split into left and right halfs, it will break it self down into individual arrays and merge them back up
+and returns the value from using merge function on the left and right halfs
 */
 
 function merge(array1, array2) {
