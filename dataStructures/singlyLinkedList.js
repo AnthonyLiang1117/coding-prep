@@ -50,6 +50,41 @@ class SinglyLinkedList {
     this.length++;
     return this;
   }
+
+  // pop method that removes the last node from the back of the singly linked list and returns the value of the node removed
+  pop() {
+    // if the singly linked list is empty, return undefined
+    if (!this.head) return undefined;
+
+    // create a variable that holds the 2nd to last node
+    let currentNode = this.head;
+
+    // create a variable that holds the tail node we are looking for
+    let nextNode = currentNode;
+
+    // loop until we reach the tail node
+    while (nextNode.next) {
+      currentNode = nextNode;
+      nextNode = currentNode.next;
+    }
+
+    // reassign the tail property to be the 2nd to last node
+    this.tail = currentNode;
+
+    // set the tail proerty aka the 2nd to last node's next value to be null
+    currentNode.next = null;
+
+    // decrement the length by 1;
+    this.length--;
+
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+
+    // return the value of the node removed
+    return nextNode.value;
+  }
 }
 
 const list = new SinglyLinkedList();
