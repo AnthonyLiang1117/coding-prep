@@ -87,7 +87,7 @@ class SinglyLinkedList {
     return nextNode.value;
   }
 
-  // shift method that removes the a node from the front of the singly linked list and retursn the value of the node removed
+  // shift method that removes the a node from the front of the singly linked list and returns the value of the node removed
   shift() {
     // if the linked list is empty, return undefined
     if (!this.head) return undefined;
@@ -107,9 +107,34 @@ class SinglyLinkedList {
     // return the removed node's v
     return removeNode.value;
   }
+
+  // unshift method that, takes a value as a parameter, adds a node to the front of the singly linked list and returns the list
+  unshift(value) {
+    // creates a new node with the value passed in
+    let newNode = new Node(value);
+
+    // if the singly linked list is empty, assign both the head and tail property to be the newly created node
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = this.head;
+    } else {
+      // if not, assign the new Node's next property to be the current head property
+      newNode.next = this.head;
+
+      // reassign the singly linked list's head property to be the newly created Node
+      this.head = newNode;
+    }
+    // increment the list's length by 1;
+    this.length++;
+
+    // return the list;
+    return this;
+  }
 }
 
 const list = new SinglyLinkedList();
 list.push('good morning');
 console.log('CURRENT SINGLY LINKED LIST !!!!', list.push('good afternoon'));
-console.log('REMOVED NODE VALUE!!!', list.shift());
+console.log('CURRENT SINGLY LINKED LIST !!!!', list.push('hello'));
+console.log('CURRENT SINGLY LINKED LIST !!!!', list.push('hi'));
+console.log('CURRENT SINGLY LINKED LIST !!!!', list.push('bye'));
