@@ -163,11 +163,46 @@ class SinglyLinkedList {
     // if the node is not found, return false
     return false;
   }
+
+  // insert method that, takes an index and a value, adds a node at that given index. Should always return true or false;
+  insert(index, value) {
+    // if the index is negative or greater than the length of the singly linked list, return false;
+    if (index < 0 || index > this.length) return false;
+
+    // create new node with the given value
+    let newNode = new Node(value);
+
+    // if the index is equal to the length of the singly linked list, just add the new Node onto the end of the list
+    if (index === this.length) return !!this.push(value);
+
+    // if the index is equal to 0, just add the new Node onto the beginning of the list
+    if (index === 0) return !!this.unshift(value);
+
+    // get the node at the postion right before where we want to insert the new node
+    let previousNode = this.get(index - 1);
+
+    // assign the new Node's next property to be the node at the position we want to insert the new node at
+    newNode.next = previousNode.next;
+
+    // reassign that node's next property to be the newly created node
+    previousNode.next = newNode;
+
+    // increment the length of the list by 1;
+    this.length++;
+
+    // return true;
+    return true;
+  }
 }
 
 const list = new SinglyLinkedList();
 list.push('good morning');
-console.log('CURRENT SINGLY LINKED LIST !!!!', list.push('good afternoon'));
-console.log('CURRENT SINGLY LINKED LIST !!!!', list.push('hello'));
-console.log('CURRENT SINGLY LINKED LIST !!!!', list.push('hi'));
-console.log('CURRENT SINGLY LINKED LIST !!!!', list.push('bye'));
+list.push('good afternoon');
+list.push('hello');
+list.push('hi');
+list.push('bye');
+// console.log('INSERTING A NODE !!!', list.insert(0, 'inserting'));
+// console.log('INSERTING A NODE!!!', list.insert(6, 'ending'));
+console.log(list);
+// console.log('GETTING NODE AT POSITION 2!!', list.get(2));
+// console.log('LOOKING AT THE PREVIOUS NODE!!', list.get(1));
