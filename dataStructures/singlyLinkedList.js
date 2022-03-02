@@ -148,6 +148,21 @@ class SinglyLinkedList {
     // return the node at that position
     return returnedNode;
   }
+
+  // set method that, takes an index and a new value, finds the node at that index. If found, change the value of the node and return true. If not, return false.
+  set(index, newValue) {
+    // use the get method to get the node at the given index
+    let getNode = this.get(index);
+
+    // if the node is found,
+    if (getNode) {
+      // reassign the value property for that node and return true
+      getNode.value = newValue;
+      return true;
+    }
+    // if the node is not found, return false
+    return false;
+  }
 }
 
 const list = new SinglyLinkedList();
