@@ -193,6 +193,33 @@ class SinglyLinkedList {
     // return true;
     return true;
   }
+
+  // remove method that, takes an index, removes the node at the given index, should return the removed node
+  remove(index) {
+    // if the index is negative or greater than or equal to the singly linked lists length, return undefined;
+    if (index < 0 || index >= this.length) return undefined;
+
+    // if the index is equal to the length -1, remove the last node from the singly linked list
+    if (index === this.length - 1) return this.pop();
+
+    // if the index is equal to 0, remove the first node from the singly linked list
+    if (index === 0) return this.shift();
+
+    // find the node that is right before the node we are trying to remove
+    let previousNode = this.get(index - 1);
+
+    // create a variable to hold the node are we trying to remove
+    let removedNode = previousNode.next;
+
+    // reassign the previous node's next property to be current next property's next property
+    previousNode.next = removedNode.next;
+
+    // decrement the length of the singly linked list by 1;
+    this.length--;
+
+    // return the value of the node removed
+    return removedNode;
+  }
 }
 
 const list = new SinglyLinkedList();
@@ -203,6 +230,7 @@ list.push('hi');
 list.push('bye');
 // console.log('INSERTING A NODE !!!', list.insert(0, 'inserting'));
 // console.log('INSERTING A NODE!!!', list.insert(6, 'ending'));
+console.log('removing a node', list.remove('3'));
 console.log(list);
 // console.log('GETTING NODE AT POSITION 2!!', list.get(2));
 // console.log('LOOKING AT THE PREVIOUS NODE!!', list.get(1));
