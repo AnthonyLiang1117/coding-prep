@@ -130,6 +130,24 @@ class SinglyLinkedList {
     // return the list;
     return this;
   }
+
+  // get method that, takes a index as a paramter, finds the node at that position in the singly linked list and returns that node
+  // singly linked lists are like arrays where the first item is the 0th index
+  get(index) {
+    // if the index is negative or greater than or equal to the length of the singly linked list, return null;
+    if (index < 0 || index >= this.length) return null;
+
+    // create a variable to store the node that we are looking for currently
+    let returnedNode = this.head;
+
+    // loop through the singly linked list until we get to the index
+    for (let i = 1; i <= index; i++) {
+      returnedNode = returnedNode.next;
+    }
+
+    // return the node at that position
+    return returnedNode;
+  }
 }
 
 const list = new SinglyLinkedList();
