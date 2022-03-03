@@ -220,6 +220,40 @@ class SinglyLinkedList {
     // return the value of the node removed
     return removedNode;
   }
+
+  // reverse method that reverses the singly linked list in place and returns the list at the end
+  reverse() {
+    // create a variable to hold the current node and start at tail node as that is the new end
+    let current = this.head;
+
+    // swap the head and tail property of the linked list
+    this.head = this.tail;
+    this.tail = current;
+
+    // create a variable to hold the curent node's previous node
+    let previous = null;
+
+    // create a variable to hold the current node's next node
+    let next;
+
+    // loop through the linked list while the current node is not the head node
+    for (let i = 0; i < this.length; i++) {
+      // set next variable to be the next node that is after the current node
+      next = current.next;
+
+      // make it so the current node v v   at was before it
+      current.next = previous;
+
+      // set prev variable to be the current node variable
+      previous = current;
+
+      // set the current node variable to be the next variable
+      current = next;
+    }
+
+    // return the linked list
+    return this;
+  }
 }
 
 const list = new SinglyLinkedList();
@@ -230,7 +264,6 @@ list.push('hi');
 list.push('bye');
 // console.log('INSERTING A NODE !!!', list.insert(0, 'inserting'));
 // console.log('INSERTING A NODE!!!', list.insert(6, 'ending'));
-console.log('removing a node', list.remove('3'));
-console.log(list);
+console.log('reversing', list.reverse());
 // console.log('GETTING NODE AT POSITION 2!!', list.get(2));
 // console.log('LOOKING AT THE PREVIOUS NODE!!', list.get(1));
