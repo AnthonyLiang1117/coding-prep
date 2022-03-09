@@ -194,7 +194,23 @@ class DoublyLinkedList {
     return currentNode;
   }
 
-  //
+  // set method, takes an index and value, gets the node at the given index and updates the value of that node while return a boolean
+  set(index, newValue) {
+    // create a variable that utilizies the get method to get the node at the given index
+    let getNode = this.get(index);
+
+    // if the node is is truthy
+    if (getNode) {
+      // reassign that node's value property to be the new value
+      getNode.value = newValue;
+
+      // return true
+      return true;
+    }
+
+    // if the node is falsey, return false;
+    return false;
+  }
 }
 
 const list = new DoublyLinkedList();
@@ -203,4 +219,5 @@ list.push('1st node');
 list.push('2nd node');
 list.push('3rd node');
 list.push('4th node');
-console.log(list.get(0));
+console.log(list.set(-1, '-1st node'));
+console.log(list);
