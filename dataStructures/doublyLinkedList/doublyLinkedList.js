@@ -88,10 +88,44 @@ class DoublyLinkedList {
     // return the removed node
     return removeNode;
   }
+
+  // shift method, takes no parameters, removes a node from the beginning of the doubly linked list
+  shift() {
+    // check to see if the doubly linked list is empty, if so , return undefined;
+    if (!this.tail) return undefined;
+
+    // create a variable to hold the node that we want to eventually remove
+    let oldHead = this.head;
+
+    // if we end up removing the last node of the list, we want to assign the head and tail properties to be null since it will be an empty list
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = this.head;
+
+      // if not,
+    } else {
+      // we want to reassign the head property to be the old head's next property
+      this.head = oldHead.next;
+
+      // we want to reassign the new head's previous property to be null;
+      this.head.previous = null;
+
+      // we want to also reassign the old head's next property to be null;
+      oldHead.next = null;
+    }
+    // decrement the length of the doubly linked list since we are removing a node from the list;
+    this.length--;
+
+    // return the removed node;
+    return oldHead;
+  }
 }
 
 const list = new DoublyLinkedList();
 list.push('first node');
 list.push('second node');
 list.push('third node');
-console.log(list.pop());
+console.log(list.shift());
+console.log(list.shift());
+console.log(list.shift());
+console.log(list);
