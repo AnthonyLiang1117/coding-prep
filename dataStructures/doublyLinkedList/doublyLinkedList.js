@@ -57,6 +57,38 @@ class DoublyLinkedList {
     // return the list
     return this;
   }
+
+  //pop method, takes no parameters, removes a node from the end of the doubly linked list
+  pop() {
+    // check to see if the doubly linked list is empty, if so, return undefined
+    if (!this.head) return undefined;
+
+    // creates a variable to hold the node we want to eventually remove
+    let removeNode = this.tail;
+
+    // checks to see if we are about to remove the last node from the linked list, if so make the head and tail property null to match that
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = this.head;
+
+      // if not,
+    } else {
+      // reassign the tail property to be the removing node's previous property
+      this.tail = removeNode.previous;
+
+      // reassign the new tail's next property to be null;
+      this.tail.next = null;
+    }
+    // decrement the length of the doubly linked list
+    this.length--;
+
+    // remove the next and previous properties from the removed node
+    removeNode.next = null;
+    removeNode.previous = null;
+
+    // return the removed node
+    return removeNode;
+  }
 }
 
 const list = new DoublyLinkedList();
