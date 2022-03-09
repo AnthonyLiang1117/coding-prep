@@ -78,13 +78,12 @@ class DoublyLinkedList {
 
       // reassign the new tail's next property to be null;
       this.tail.next = null;
+
+      // remove the previous properties from the removed node since it will still have the linkage
+      removeNode.previous = null;
     }
     // decrement the length of the doubly linked list
     this.length--;
-
-    // remove the next and previous properties from the removed node
-    removeNode.next = null;
-    removeNode.previous = null;
 
     // return the removed node
     return removeNode;
