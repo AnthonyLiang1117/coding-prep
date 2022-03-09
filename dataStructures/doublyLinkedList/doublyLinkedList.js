@@ -194,7 +194,7 @@ class DoublyLinkedList {
     return currentNode;
   }
 
-  // set method, takes an index and value, gets the node at the given index and updates the value of that node while return a boolean
+  // set method, takes an index and value, gets the node at the given index and updates the value of that node while returning a boolean
   set(index, newValue) {
     // create a variable that utilizies the get method to get the node at the given index
     let getNode = this.get(index);
@@ -211,6 +211,45 @@ class DoublyLinkedList {
     // if the node is falsey, return false;
     return false;
   }
+
+  // insert method, takes a index and a value, adds a node with the given value and adds it at the given index while returning a boolean
+  insert(index, value) {
+    // checks to see if the index is within the range of the length, if not, return null
+    if (index < 0 || index > this.length) return false;
+
+    // checks to see if the index is 0, if so, use unshift method and return true
+    if (index === 0) return !!this.unshift(value);
+
+    // checks to see if the index is the length, if so, use push method since we are lookign to add a node to the end of the list and return true
+    if (index === this.length) return !!this.push(value);
+
+    // we want to create a node with the given value
+    let newNode = new Node(value);
+
+    // grab the node that is going to be right before where you want to insert the node to
+    let previousNode = this.get(index - 1);
+
+    // create a variable to hold the reference to current node at the given index
+    let afterNode = previousNode.next;
+
+    // assign the newly created node 's next to be the grabbed node's next value
+    newNode.next = afterNode;
+
+    // assign the old node at the given index 's previous property to point at the new node
+    afterNode.previous = newNode;
+
+    // assign the newly created node's previous to be the grabbed node
+    newNode.previous = previousNode;
+
+    // assign the grabbed node's next to be the newly created node
+    previousNode.next = newNode;
+
+    // increment the length of the doubly linked list since we just added a node to it
+    this.length++;
+
+    // return true
+    return true;
+  }
 }
 
 const list = new DoublyLinkedList();
@@ -219,5 +258,5 @@ list.push('1st node');
 list.push('2nd node');
 list.push('3rd node');
 list.push('4th node');
-console.log(list.set(-1, '-1st node'));
+console.log(list.insert(5, '5th node'));
 console.log(list);
