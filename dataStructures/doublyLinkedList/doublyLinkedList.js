@@ -148,7 +148,59 @@ class DoublyLinkedList {
     // return the list
     return this;
   }
+
+  // get method, takes an index, returns the node at the given index
+  get(index) {
+    // check to see if the index is within the scope of the doubly linked list length, if not, return null;
+    if (index < 0 || index >= this.length) return null;
+
+    // initialized currentNode
+    let counter, currentNode;
+
+    // checks to see if the index is less than or equal to half of the doubly linked list's length, if so
+    if (index <= this.length / 2) {
+      // create a counter to eventually reach the index
+      counter = 0;
+
+      // create a variable to hold the starting node, in this case the head node;
+      currentNode = this.head;
+
+      // have a while loop that will run until the counter === the index;
+      while (counter !== index) {
+        // reassign the variable to equal to the next one in the doubly linked list
+        currentNode = currentNode.next;
+
+        // increment counter by 1
+        counter++;
+      }
+      // if the index is greater than the half of the doubly linked list
+    } else {
+      // create a counter that starts at the position of the last node (length - 1 since it is like an array)
+      counter = this.length - 1;
+
+      // create a varialble to hold the srating node, in this case the tail node;
+      currentNode = this.tail;
+
+      // have a while loop that will run until the counter === the index;
+      while (counter !== index) {
+        // reassign the variable to be the previous node in the doubly linked list
+        currentNode = currentNode.previous;
+
+        // decrement the counter by 1
+        counter--;
+      }
+    }
+    // return the node;
+    return currentNode;
+  }
+
+  //
 }
 
 const list = new DoublyLinkedList();
-console.log(list.unshift('zeroth node'));
+list.push('0th node');
+list.push('1st node');
+list.push('2nd node');
+list.push('3rd node');
+list.push('4th node');
+console.log(list.get(0));
