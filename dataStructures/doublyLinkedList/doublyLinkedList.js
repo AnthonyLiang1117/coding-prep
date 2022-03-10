@@ -250,6 +250,43 @@ class DoublyLinkedList {
     // return true
     return true;
   }
+
+  // remove method , takes an index, removes the node at that given index and returns the removed node
+  remove(index) {
+    // if the index outside of the range of the length of doubly linked list, return undefined
+    if (index < 0 || index >= this.length) return undefined;
+
+    // if the index is 0, we can just use shift method to remove the node from the beginning of the list
+    if (index === 0) return this.shift();
+
+    // if the index is equal to the index of the last node in doubly linked list, we can just use pop method to remove a node for the end of the list
+    if (index === this.length - 1) return this.pop();
+
+    // grab the node we want to remove with the get method
+    let foundNode = this.get(index);
+
+    // we can create a variable to hold the previous node of found node
+    let previousNode = foundNode.previous;
+
+    // we can create a variable to hold the next node of the found node
+    let nextNode = foundNode.next;
+
+    // reassign previous node's next property to point at the next node
+    previousNode.next = nextNode;
+
+    // reassign next node's previous property to point at the previous node
+    nextNode.previous = previousNode;
+
+    // assign the found node's previous and next properties to be null so it does not link to anything
+    foundNode.next = null;
+    foundNode.previous = null;
+
+    // decrement the length since we just removed a node from the list
+    this.length--;
+
+    // return the removed node
+    return foundNode;
+  }
 }
 
 const list = new DoublyLinkedList();
@@ -258,5 +295,4 @@ list.push('1st node');
 list.push('2nd node');
 list.push('3rd node');
 list.push('4th node');
-console.log(list.insert(5, '5th node'));
-console.log(list);
+console.log(list.remove(5));
