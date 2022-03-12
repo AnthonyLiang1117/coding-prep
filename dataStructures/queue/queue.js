@@ -23,7 +23,7 @@ reassign the last property to be
 reassign the first property to be the old first's next property
 reassign the old first's next property to be null;
 decrement the size by 1 since we are removing an node from the queue
-return the removed node
+return the removed node's value
 
 */
 
@@ -51,10 +51,13 @@ class Queue {
       this.last.next = newNode;
       this.last = newNode;
     }
+
     this.size++;
     return this;
   }
   dequeue() {
+    if (this.size === 0) return null;
+
     let oldFirst = this.first;
 
     if (this.size === 1) {
@@ -62,10 +65,9 @@ class Queue {
     }
 
     this.first = oldFirst.next;
-    oldFirst.next = null;
 
     this.size--;
-    return oldFirst;
+    return oldFirst.value;
   }
 }
 
