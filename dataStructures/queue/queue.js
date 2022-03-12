@@ -14,6 +14,16 @@ reassign the new node to be the new tail
 increment the size by 1 since we just added a node to the queue
 return the list
 
+dequeue method, does not take parameters, removes a node from the beginning to simiulate the first element added to the queue gets removed
+creates a variable to hold the first node in the queue
+checks to see if the we are about to remove the last node in the queue
+if so,
+reassign the last property to be
+
+reassign the first property to be the old first's next property
+reassign the old first's next property to be null;
+decrement the size by 1 since we are removing an node from the queue
+return the removed node
 
 */
 
@@ -44,9 +54,26 @@ class Queue {
     this.size++;
     return this;
   }
+  dequeue() {
+    let oldFirst = this.first;
+
+    if (this.size === 1) {
+      this.last = null;
+    }
+
+    this.first = oldFirst.next;
+    oldFirst.next = null;
+
+    this.size--;
+    return oldFirst;
+  }
 }
 
 let queue = new Queue();
 queue.enqueue(1);
 queue.enqueue(2);
 queue.enqueue(3);
+console.log(queue.dequeue());
+console.log(queue.dequeue());
+console.log(queue.dequeue());
+console.log(queue);
