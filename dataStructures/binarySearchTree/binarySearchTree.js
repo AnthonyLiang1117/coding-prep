@@ -54,7 +54,7 @@ class BinarySearchTree {
   //     } else {
   //       this.compare(currentNode.left, newNode);
   //     }
-  //   } else {
+  //   } else if (newNode.value > currentNode.value) {
   //     if (!currentNode.right) {
   //       currentNode.right = newNode;
   //     } else {
@@ -75,7 +75,35 @@ class BinarySearchTree {
   //   return this;
   // }
 
-  //
+  // iterative way for insert method in BST.js
+  insert(value) {
+    let newNode = new Node(value);
+
+    if (!this.root) {
+      this.root = newNode;
+      return this;
+    } else {
+      let currentNode = this.root;
+
+      while (true) {
+        if (newNode.value < currentNode.value) {
+          if (!currentNode.left) {
+            currentNode.left = newNode;
+            return this;
+          } else {
+            currentNode = currentNode.left;
+          }
+        } else if (newNode.value > currentNode.value) {
+          if (!currentNode.right) {
+            currentNode.right = newNode;
+            return this;
+          } else {
+            currentNode = currentNode.right;
+          }
+        }
+      }
+    }
+  }
 }
 
 let BST = new BinarySearchTree();
