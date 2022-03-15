@@ -45,35 +45,37 @@ class BinarySearchTree {
     this.root = null;
   }
 
-  // iterative version of insert method
+  // recursive version of insert method
 
-  compare(currentNode, newNode) {
-    if (newNode.value < currentNode.value) {
-      if (!currentNode.left) {
-        currentNode.left = newNode;
-      } else {
-        this.compare(currentNode.left, newNode);
-      }
-    } else {
-      if (!currentNode.right) {
-        currentNode.right = newNode;
-      } else {
-        this.compare(currentNode.right, newNode);
-      }
-    }
-  }
+  // compare(currentNode, newNode) {
+  //   if (newNode.value < currentNode.value) {
+  //     if (!currentNode.left) {
+  //       currentNode.left = newNode;
+  //     } else {
+  //       this.compare(currentNode.left, newNode);
+  //     }
+  //   } else {
+  //     if (!currentNode.right) {
+  //       currentNode.right = newNode;
+  //     } else {
+  //       this.compare(currentNode.right, newNode);
+  //     }
+  //   }
+  // }
 
-  insert(value) {
-    let newNode = new Node(value);
+  // insert(value) {
+  //   let newNode = new Node(value);
 
-    if (!this.root) {
-      this.root = newNode;
-    } else {
-      this.compare(this.root, newNode);
-    }
+  //   if (!this.root) {
+  //     this.root = newNode;
+  //   } else {
+  //     this.compare(this.root, newNode);
+  //   }
 
-    return this;
-  }
+  //   return this;
+  // }
+
+  //
 }
 
 let BST = new BinarySearchTree();
