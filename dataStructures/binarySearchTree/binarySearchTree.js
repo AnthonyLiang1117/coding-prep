@@ -36,7 +36,30 @@ Implementing a Binary Search Tree class
     - if there isnt,
       - assign the right property to the node weare looking at as the newly created node
     - if there is,
-      - move the node to right property and redo the steps of checking if its less or greater than the valur
+      - move the node to right property and redo the steps of checking if its less or greater than the value
+
+.find()
+- takes a value and returns a boolean depending if the given value passed in is in the BST
+- checks to see if the BST is empty
+- if it is, return false since no nodes means no values
+- if not, if we are doing it iteratively
+  - create a variable to represent the current node we are looking for
+  - create a while loop that holds everything inside to traverse through the BST
+  - check to see if the given value is equal to the current node's value
+    - if so,
+    - return true
+    - if not,
+      - checks to see if the value is less or greater than the current node's value
+      - if its less than
+        - if there is a value for the current node's left property,
+          - reassign the current node and repeat the steps
+        - if there isnt a value,
+          - return false to break out of the while loop
+      - if its greater than
+        - if there is a value for the current node's right property,
+          - reassisng the current node and repeat the steps
+        - if there isnt a value,
+         - return false to break out of the while loop
 
 */
 
@@ -105,12 +128,35 @@ class BinarySearchTree {
       }
     }
   }
+
+  find(value) {
+    if (!this.root) return false;
+
+    let currentNode = this.root;
+
+    while (true) {
+      if (value === currentNode.value) return true;
+
+      if (value < currentNode.value) {
+        if (!currentNode.left) return false;
+
+        currentNode = currentNode.left;
+      } else if (value > currentNode.value) {
+        if (!currentNode.right) return false;
+
+        currentNode = currentNode.right;
+      }
+    }
+  }
 }
 
 let BST = new BinarySearchTree();
 BST.insert(10);
 BST.insert(5);
 BST.insert(15);
-console.log(BST.insert(8));
-console.log(BST.insert(9));
-console.log(BST.root.left.right);
+BST.insert(8);
+BST.insert(9);
+console.log(BST.find(9));
+console.log(BST.find(10));
+console.log(BST.find(15));
+console.log(BST.find(20));
