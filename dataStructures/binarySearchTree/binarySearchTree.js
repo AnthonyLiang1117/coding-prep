@@ -48,6 +48,7 @@ class BinarySearchTree {
   // recursive version of insert method
 
   // compare(currentNode, newNode) {
+  //   if (newNode.value === currentNode.value) return undefined;
   //   if (newNode.value < currentNode.value) {
   //     if (!currentNode.left) {
   //       currentNode.left = newNode;
@@ -76,6 +77,7 @@ class BinarySearchTree {
   // }
 
   // iterative way for insert method in BST.js
+
   insert(value) {
     let newNode = new Node(value);
 
@@ -86,6 +88,7 @@ class BinarySearchTree {
       let currentNode = this.root;
 
       while (true) {
+        if (newNode.value === currentNode.value) return undefined;
         if (newNode.value < currentNode.value) {
           if (!currentNode.left) {
             currentNode.left = newNode;
