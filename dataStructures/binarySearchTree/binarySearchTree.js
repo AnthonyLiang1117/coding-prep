@@ -84,26 +84,24 @@ class BinarySearchTree {
     if (!this.root) {
       this.root = newNode;
       return this;
-    } else {
-      let currentNode = this.root;
+    }
 
-      while (true) {
-        if (newNode.value === currentNode.value) return undefined;
-        if (newNode.value < currentNode.value) {
-          if (!currentNode.left) {
-            currentNode.left = newNode;
-            return this;
-          } else {
-            currentNode = currentNode.left;
-          }
-        } else if (newNode.value > currentNode.value) {
-          if (!currentNode.right) {
-            currentNode.right = newNode;
-            return this;
-          } else {
-            currentNode = currentNode.right;
-          }
+    let currentNode = this.root;
+
+    while (true) {
+      if (newNode.value === currentNode.value) return undefined;
+      if (newNode.value < currentNode.value) {
+        if (!currentNode.left) {
+          currentNode.left = newNode;
+          return this;
         }
+        currentNode = currentNode.left;
+      } else if (newNode.value > currentNode.value) {
+        if (!currentNode.right) {
+          currentNode.right = newNode;
+          return this;
+        }
+        currentNode = currentNode.right;
       }
     }
   }
