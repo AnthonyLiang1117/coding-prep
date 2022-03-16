@@ -17,7 +17,7 @@ Implementing a Binary Search Tree class
 - creating the overall BST Data Structure
 - takes in no paramters and has a root property
 
-.insert()
+.insert() - recursive or iterative solution
 - takes a value and returns the entire linked list if inserted a node
 - create a node with the given value
 - checks to see if the BST has a root
@@ -38,7 +38,7 @@ Implementing a Binary Search Tree class
     - if there is,
       - move the node to right property and redo the steps of checking if its less or greater than the value
 
-.find()
+.find() - iterative solution
 - takes a value and returns a boolean depending if the given value passed in is in the BST
 - checks to see if the BST is empty
 - if it is, return false since no nodes means no values
@@ -61,6 +61,21 @@ Implementing a Binary Search Tree class
         - if there isnt a value,
          - return false to break out of the while loop
 
+.breadthFirstSearch() - iterative solution
+- the tree traversal method that makes sure we visit every node on one level before moving on to the next
+- by using a queue, this allows for us to put every node, starting from the root, on each level from left to right onto the queue to make sure we hit everything on the level and their children will then also be added to the queue in order from left to right
+- takes no parameters and returns an array of all the values in the tree
+- create a queue to keep track of the node we need to look at (FIFO so .push() to add things on to the end and .shift() to remove things from the beginning)
+- create a variable to hold the values we will need to return
+- create a variable to hold the current node we are looking at
+- enqueue the root's value of the tree
+- have a loop that runs while the queue has values in it
+- reassign current node variable to hold the value for when dequeued a node from the queue
+  - push the value to the returning value's array
+  - check to see if the current node has a left child
+    - if so, enqueue the left child onto the queue
+  - check to see if the current node has a right child
+    - if so, enqueue the right child onto the queue
 */
 
 class BinarySearchTree {
@@ -148,6 +163,26 @@ class BinarySearchTree {
       }
     }
   }
+
+  breadthFirstSearch() {
+    let valuesArray = [];
+    let queue = [];
+    let currentNode = null;
+
+    queue.push(this.root);
+
+    while (queue.length) {
+      currentNode = queue.shift();
+
+      valuesArray.push(currentNode.value);
+
+      if (currentNode.left) queue.push(currentNode.left);
+
+      if (currentNode.right) queue.push(currentNode.right);
+    }
+
+    return valuesArray;
+  }
 }
 
 let BST = new BinarySearchTree();
@@ -156,7 +191,4 @@ BST.insert(5);
 BST.insert(15);
 BST.insert(8);
 BST.insert(9);
-console.log(BST.find(9));
-console.log(BST.find(10));
-console.log(BST.find(15));
-console.log(BST.find(20));
+console.log(BST.breadthFirstSearch());
