@@ -46,4 +46,43 @@ class BinarySearchTree {
   constructor() {
     this.root = null;
   }
+
+  insert(value) {
+    let newNode = new Node(value);
+
+    if (!this.root) {
+      this.root = newNode;
+      return this;
+    }
+
+    let currentNode = this.root;
+
+    while (true) {
+      if (value === currentNode.value) return undefined;
+
+      if (value < currentNode.value) {
+        if (!currentNode.left) {
+          currentNode.left = newNode;
+          return this;
+        }
+
+        currentNode = currentNode.left;
+      } else if (value > currentNode.value) {
+        if (!currentNode.right) {
+          currentNode.right = newNode;
+          return this;
+        }
+
+        currentNode = currentNode.right;
+      }
+    }
+  }
 }
+
+let BST = new BinarySearchTree();
+BST.insert(10);
+BST.insert(5);
+BST.insert(15);
+BST.insert(8);
+console.log(BST.insert(3));
+console.log(BST.root.left);
