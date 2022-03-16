@@ -8,9 +8,9 @@ the values that are less than the root value are to the left of it and the value
 
 - creating a node with the given value
 - check to see if the binary search tree is empty,
-- if so,
-  - assign the new node to be the root of the BST
-  - return the BST
+  - if so,
+    - assign the new node to be the root of the BST
+    - return the BST
 - create a variable to hold the node that we are current looking at and comparing with the new node we created
 - create a while loop that keeps going
   - check to see if the value of the new node is equal to, less than or greater than the value of the current node we are looking at
