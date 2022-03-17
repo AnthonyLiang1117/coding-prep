@@ -224,6 +224,22 @@ class BinarySearchTree {
 
     return values;
   }
+
+  dfsPostOrder() {
+    let values = [];
+    let currentNode = this.root;
+
+    function traverse(node) {
+      if (node.left) traverse(node.left);
+
+      if (node.right) traverse(node.right);
+
+      values.push(node.value);
+    }
+
+    traverse(currentNode);
+    return values;
+  }
 }
 
 let BST = new BinarySearchTree();
