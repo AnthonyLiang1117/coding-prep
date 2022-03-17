@@ -100,6 +100,21 @@ Implementing a Binary Search Tree class
   - push the value of the given node onto the array
 - invoke the helper function with the current node we are using
 - return the value of the tree
+
+.dsfInOrder(){
+- depth first search tree traversal method that starts at a node, traverses everything on the left of it, processes itself and then traverses everything on the right
+- create a variable that holds the values of the tree
+- create a variable that holds the first node we are starting at aka the root
+- create a helper function that accepts a node
+  - since it wants to process everything to the left first, it will check to see if the given node has a left child
+    - if it does, call the helper with the left child
+  - since it wants to process itself 2nd, it will push the given node's value onto the array
+  - since it wants to to process everythin to the right last, it will check to see if the given node has a right child
+    - if it does, call the helper with the right child
+- invoke the helper with the starting node
+- return the values of the tree
+
+}
 */
 
 class BinarySearchTree {
@@ -240,6 +255,22 @@ class BinarySearchTree {
     traverse(currentNode);
     return values;
   }
+
+  dfsInOrder() {
+    let values = [];
+    let startingNode = this.root;
+
+    const traverse = (node) => {
+      if (node.left) traverse(node.left);
+
+      values.push(node.value);
+
+      if (node.right) traverse(node.right);
+    };
+
+    traverse(startingNode);
+    return values;
+  }
 }
 
 let BST = new BinarySearchTree();
@@ -248,4 +279,4 @@ BST.insert(5);
 BST.insert(15);
 BST.insert(8);
 BST.insert(9);
-console.log(BST.dfsPostOrder());
+console.log(BST.dfsInOrder());
