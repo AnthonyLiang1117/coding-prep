@@ -76,6 +76,30 @@ Implementing a Binary Search Tree class
     - if so, enqueue the left child onto the queue
   - check to see if the current node has a right child
     - if so, enqueue the right child onto the queue
+
+.dfsPreOrder() - recursive solution
+- the depth first search tree traversal method that hits on the node itself first, then processes the left nodes then all of the right nodes
+- create a variable to hold the values of the tree
+- create a variable to hold the current node we are looking at
+- create a helper function that takes a node
+  - pushes the value of the given node onto the array of values
+  - checks to see if there is a left child of the given node
+    - if so, call the helper function passing in the left child
+  - checks to see if there is a right child of the given node
+    - if so, call the helper function passing in the right child
+
+.dsfPostOrder() - recursive solution
+- the depth first search tree traversal method that starts at node processes the left node, processes the right node and then processes itself
+- create a variable to store the values of the tree
+- create a variable to hold the current node we are starting at aka the root
+- create a helper function that accepts a node
+  - since it wants to process the left nodes first, checks to see if the given node has a left child,
+    - if so, call the helper function on its left child
+  - since it wants to process the right nodes second, checks to see if the given node has a right child,
+    - if so, call the helper fucntion on its right child
+  - push the value of the given node onto the array
+- invoke the helper function with the current node we are using
+- return the value of the tree
 */
 
 class BinarySearchTree {
@@ -165,7 +189,7 @@ class BinarySearchTree {
   }
 
   breadthFirstSearch() {
-    let valuesArray = [];
+    let values = [];
     let queue = [];
     let currentNode = null;
 
@@ -174,14 +198,31 @@ class BinarySearchTree {
     while (queue.length) {
       currentNode = queue.shift();
 
-      valuesArray.push(currentNode.value);
+      values.push(currentNode.value);
 
       if (currentNode.left) queue.push(currentNode.left);
 
       if (currentNode.right) queue.push(currentNode.right);
     }
 
-    return valuesArray;
+    return values;
+  }
+
+  dfsPreOrder() {
+    let values = [];
+    let currentNode = this.root;
+
+    function traverse(node) {
+      values.push(node.value);
+
+      if (node.left) traverse(node.left);
+
+      if (node.right) traverse(node.right);
+    }
+
+    traverse(currentNode);
+
+    return values;
   }
 }
 
@@ -191,4 +232,4 @@ BST.insert(5);
 BST.insert(15);
 BST.insert(8);
 BST.insert(9);
-console.log(BST.breadthFirstSearch());
+console.log(BST.dfsPostOrder());
