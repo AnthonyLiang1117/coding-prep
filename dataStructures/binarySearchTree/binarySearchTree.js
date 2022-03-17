@@ -279,4 +279,4 @@ BST.insert(5);
 BST.insert(15);
 BST.insert(8);
 BST.insert(9);
-console.log(BST.dfsInOrder());
+console.log(BST.dfsPostOrder());
