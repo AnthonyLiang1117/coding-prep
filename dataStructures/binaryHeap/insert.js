@@ -40,7 +40,7 @@ class MaxBinaryHeap {
       ];
     };
 
-    let currentIndex = this.values[this.values.length - 1];
+    let currentIndex = this.values.length - 1;
     let current = this.values[currentIndex];
 
     while (currentIndex > 0) {
