@@ -16,10 +16,17 @@ means to take a key and switch it into an index so we can add it to our hash tab
   - reassign the total to equal itself * by the prime number + the index of the character % the length of the array to get it within the bounds of the array
 - return the index
 
+set method
+takes a key and a value and wants to store the value at the index that is provided by putting the key through the hash function
+- get the index that is returned by putting the key into the hash table
+- check to see if there already a value at that index
+- if not,
+  - assign the value at that index to be an array
+- push the key value as an array onto the array
 */
 
 class HashTable {
-  constructor(size = 53) {
+  constructor(size = 3) {
     this.keyMap = new Array(size);
   }
 
@@ -37,4 +44,20 @@ class HashTable {
 
     return index;
   }
+
+  set(key, value) {
+    let index = this.hash(key);
+
+    if (!this.keyMap[index]) {
+      this.keyMap[index] = [];
+    }
+
+    this.keyMap[index].push([key, value]);
+  }
 }
+
+let hashTable = new HashTable();
+hashTable.set('hello', 'world');
+hashTable.set('bye', 'world');
+hashTable.set('xd', 'world');
+console.log(hashTable);
