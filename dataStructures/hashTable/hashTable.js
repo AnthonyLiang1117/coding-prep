@@ -33,6 +33,19 @@ takes a key and returns the value of that corresponding key if its found
   - if we find a match, we want to return the value part of the element
 - if not,
   - return undefined
+
+keys method
+returns an array of the keys in the hash table
+- create a variable to hold the keys of our table
+- loop through the keyMap property
+- check to see if there is a value at the index we are at in the iteration
+- if so,
+    - we want to loop again through the array at that index
+    - check to see if the key at this iteration is already included in our array of keys
+    - if not,
+      - push the value of the key onto the array
+- return the array of keys
+
 */
 
 class HashTable {
@@ -80,6 +93,22 @@ class HashTable {
 
     return undefined;
   }
+
+  keys() {
+    let keysArray = [];
+
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if (this.keyMap[i]) {
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          if (!keysArray.includes(this.keyMap[i][j][0])) {
+            keysArray.push(this.keyMap[i][j][0]);
+          }
+        }
+      }
+    }
+
+    return keysArray;
+  }
 }
 
 let hashTable = new HashTable();
@@ -87,4 +116,4 @@ hashTable.set('hello', 'world');
 hashTable.set('bye', 'goodnight');
 hashTable.set('monday', '1');
 hashTable.set('wednesday', '3');
-console.log(hashTable.get('wednesday'));
+console.log(hashTable.keys());
