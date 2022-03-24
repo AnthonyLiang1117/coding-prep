@@ -46,6 +46,18 @@ returns an array of the keys in the hash table
       - push the value of the key onto the array
 - return the array of keys
 
+values method
+returns an array of the values in the hash table
+- create a variable to hold the values in the table
+- loop through the keyMap property
+- check to see if there is a value at the index of our current iteration
+- if so,
+  - loop through the array at that index
+  - check to see if we already have that value in our array of values
+  - if not,
+    - push the value onto the array of values
+- return the array of values
+
 */
 
 class HashTable {
@@ -109,6 +121,22 @@ class HashTable {
 
     return keysArray;
   }
+
+  values() {
+    let valuesArray = [];
+
+    for (let i = 0; i < this.keyMap.length; i++) {
+      if (this.keyMap[i]) {
+        for (let j = 0; j < this.keyMap[i].length; j++) {
+          if (!valuesArray.includes(this.keyMap[i][j][1])) {
+            valuesArray.push(this.keyMap[i][j][1]);
+          }
+        }
+      }
+    }
+
+    return valuesArray;
+  }
 }
 
 let hashTable = new HashTable();
@@ -116,4 +144,4 @@ hashTable.set('hello', 'world');
 hashTable.set('bye', 'goodnight');
 hashTable.set('monday', '1');
 hashTable.set('wednesday', '3');
-console.log(hashTable.keys());
+console.log(hashTable.values());
