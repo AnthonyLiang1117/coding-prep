@@ -23,6 +23,16 @@ takes a key and a value and wants to store the value at the index that is provid
 - if not,
   - assign the value at that index to be an array
 - push the key value as an array onto the array
+
+get method
+takes a key and returns the value of that corresponding key if its found
+- get the index that is returned by passing the key value
+- check to see if there even is a value at that index in the array
+- if so,
+  - we want to loop through the array at that index to see if there is match for the key part in the elements stored in that array
+  - if we find a match, we want to return the value part of the element
+- if not,
+  - return undefined
 */
 
 class HashTable {
@@ -46,7 +56,7 @@ class HashTable {
   }
 
   set(key, value) {
-    let index = this.hash(key);
+    const index = this.hash(key);
 
     if (!this.keyMap[index]) {
       this.keyMap[index] = [];
@@ -54,10 +64,27 @@ class HashTable {
 
     this.keyMap[index].push([key, value]);
   }
+
+  get(key) {
+    const index = this.hash(key);
+
+    if (this.keyMap[index]) {
+      for (let i = 0; i < this.keyMap[index].length; i++) {
+        let storedKey = this.keyMap[index][i][0];
+
+        if (storedKey === key) {
+          return this.keyMap[index][i][1];
+        }
+      }
+    }
+
+    return undefined;
+  }
 }
 
 let hashTable = new HashTable();
 hashTable.set('hello', 'world');
-hashTable.set('bye', 'world');
-hashTable.set('xd', 'world');
-console.log(hashTable);
+hashTable.set('bye', 'goodnight');
+hashTable.set('monday', '1');
+hashTable.set('wednesday', '3');
+console.log(hashTable.get('wednesday'));
