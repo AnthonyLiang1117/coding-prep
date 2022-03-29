@@ -49,6 +49,17 @@ class Graph {
       (vertex) => vertex !== vertex1
     );
   }
+
+  // removeVertex method accepts a vertex and removes that vertex and its connections from the graph
+  removeVertex(vertex) {
+    // loop through the connections array at the vertex's key
+    for (let connection of this.adjacencyList[vertex]) {
+      // each iteration, we need to call the removeEdge method with the vertex we are removing and the vertex at each iteration to remove the connections
+      this.removeEdge(vertex, connection);
+    }
+    // after the loop, we can delete the key from the graph
+    delete this.adjacencyList[vertex];
+  }
 }
 
 const graph = new Graph();
@@ -56,4 +67,6 @@ graph.addVertex('New York');
 graph.addVertex('Los Angeles');
 graph.addVertex('Chicago');
 graph.addEdge('New York', 'Los Angeles');
+graph.addEdge('New York', 'Chicago');
+graph.removeVertex('New York');
 console.log(graph);
