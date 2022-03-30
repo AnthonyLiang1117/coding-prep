@@ -139,6 +139,46 @@ class Graph {
     // return the vertices array
     return vertices;
   }
+
+  // breadth first graph traversal that accepts a starting vertex and returns an array of vertices in the graph using breadth first search approach
+  BFGT(startingVertex) {
+    // create a queue and initialize it with the starting vertex in it
+    const queue = [startingVertex];
+
+    // create a vertices array to hold all of the vertices in the graph
+    const vertices = [];
+
+    // create a visited obj to mark off when we have visited a vertex
+    const visited = {};
+
+    let currentVertex;
+
+    // mark the startingVertex as visited
+    visited[startingVertex] = true;
+
+    // start a while loop that runs while there is something in the queue
+    while (queue.length) {
+      // dequeue a vertex from the queue and put it into a variable
+      currentVertex = queue.shift();
+
+      // push that vertex onto the vertices array
+      vertices.push(currentVertex);
+
+      // loop through the values at the vertex's key in the adjacency list
+      this.adjacencyList[currentVertex].forEach((vertex) => {
+        // for each of the vertices that have no been visited yet
+        if (!visited[vertex]) {
+          // we want enqueue them onto the queue
+          queue.push(vertex);
+
+          // mark them as visited as well
+          visited[vertex] = true;
+        }
+      });
+    }
+    // return the vertices array
+    return vertices;
+  }
 }
 
 const graph = new Graph();
@@ -157,4 +197,4 @@ graph.addEdge('D', 'E');
 graph.addEdge('D', 'F');
 graph.addEdge('E', 'F');
 
-console.log(graph.DFGTIterative('A'));
+console.log(graph.BFGT('A'));
