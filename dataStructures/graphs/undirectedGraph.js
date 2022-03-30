@@ -99,6 +99,46 @@ class Graph {
     // return the vertices array
     return vertices;
   }
+
+  // depth first graph traversal accepts a vertex and returns an array of vertices in the graph in depth first search approach
+  DFGTIterative(startingVertex) {
+    // create stack variable to keep track of the vertices we need to process
+    const stack = [];
+
+    // create a vertices array that will hold all of the vertices
+    const vertices = [];
+
+    // create a visited obj that will mark when we have visited an vertex
+    const visited = {};
+
+    // push the starting vertex onto the stack
+    stack.push(startingVertex);
+
+    // have a while loop that runs while the stack has something in it
+    while (stack.length) {
+      console.log(stack);
+      // pop the next item off of the stack and put it into a variable
+      let currentVertex = stack.pop();
+
+      // if the vertex has not been visited before
+      if (!visited[currentVertex]) {
+        // push the vertex onto the vertices array
+        vertices.push(currentVertex);
+
+        // mark the vertex as visited
+        visited[currentVertex] = true;
+
+        // push each of the values of the vertex key in the adjacency list if they have not been visited or in the stack already
+        this.adjacencyList[currentVertex].forEach((connection) => {
+          if (!visited[connection] && !stack.includes(connection)) {
+            stack.push(connection);
+          }
+        });
+      }
+    }
+    // return the vertices array
+    return vertices;
+  }
 }
 
 const graph = new Graph();
@@ -117,4 +157,4 @@ graph.addEdge('D', 'E');
 graph.addEdge('D', 'F');
 graph.addEdge('E', 'F');
 
-console.log(graph.DFGTRecursive('A'));
+console.log(graph.DFGTIterative('A'));
