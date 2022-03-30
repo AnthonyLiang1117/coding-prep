@@ -60,13 +60,61 @@ class Graph {
     // after the loop, we can delete the key from the graph
     delete this.adjacencyList[vertex];
   }
+
+  // depth first graph traversal accepts a starting vertex and returns the graph in a depth first search approach
+  DFGTRecursive(startingVertex) {
+    // creates an array variable to hold all the of vertices in a depth first search approach
+    let vertices = [];
+
+    // create a obj variable to mark off the vertexes we have visited
+    let visited = {};
+
+    // create an adjacency list variable so the this context can be perserved
+    const adjacencyList = this.adjacencyList;
+
+    // create a helper function that accepts a vertex
+    (function DFT(vertex) {
+      // for the base case that we want to eventually reach to break out of recursion, should return if the vertex is empty
+      if (!vertex) return;
+
+      // pushes the given vertex onto vertices array
+      vertices.push(vertex);
+
+      // makes a key in the visted obj to mark it as true
+      visited[vertex] = true;
+
+      // loop through the array at the key value pair of vertex in the adajaceny list
+      adjacencyList[vertex].forEach((connection) => {
+        // for every element in the loop that is not marked as visited in the visited obj
+        if (!visited[connection]) {
+          // call the helper function on those vertices
+          DFT(connection);
+        }
+      });
+    })(
+      // invoke the helper function with the starting vertex
+      startingVertex
+    );
+
+    // return the vertices array
+    return vertices;
+  }
 }
 
 const graph = new Graph();
-graph.addVertex('New York');
-graph.addVertex('Los Angeles');
-graph.addVertex('Chicago');
-graph.addEdge('New York', 'Los Angeles');
-graph.addEdge('New York', 'Chicago');
-graph.removeVertex('New York');
-console.log(graph);
+graph.addVertex('A');
+graph.addVertex('B');
+graph.addVertex('C');
+graph.addVertex('D');
+graph.addVertex('E');
+graph.addVertex('F');
+
+graph.addEdge('A', 'B');
+graph.addEdge('A', 'C');
+graph.addEdge('B', 'D');
+graph.addEdge('C', 'E');
+graph.addEdge('D', 'E');
+graph.addEdge('D', 'F');
+graph.addEdge('E', 'F');
+
+console.log(graph.DFGTRecursive('A'));
