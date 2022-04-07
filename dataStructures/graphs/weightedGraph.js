@@ -29,7 +29,7 @@ class WeightedGraph {
 
   // dijkstra accept 2 vertices and returns the shorest path in an array
   dijkstra(start, end) {
-    // initializing a priorty queue
+    // initializing a priorty queue to
     const PQ = new PriorityQueue();
 
     // initializing a distance obj that will take in account how much distance interms of weight is the start vertex to any vertex in the graph
@@ -37,6 +37,12 @@ class WeightedGraph {
 
     // initializing a previous obj that will take in account at each vertex, which vertex is it traveling from
     const previous = {};
+
+    // initializing a smallest variable to hold the item that we dequeue off of the PQ
+    let smallest;
+
+    // initializing a path variable that will eventually return
+    const path = [];
 
     // create a for in loop with the keys of the adjacency list
     for (let vertex in this.adjacencyList) {
@@ -61,8 +67,39 @@ class WeightedGraph {
       previous[vertex] = null;
     }
 
-    console.log(distance);
-    console.log(previous);
+    // while there is something in the PQ
+    while (PQ.values.length) {
+      // we want to dequeue a value off of the PQ and assign it to our smallest variable
+      smallest = PQ.dequeue().value;
+
+      // check to see if smallest is equal to the end vertex, if so we are done
+      if (smallest === end) {
+        console.log('done');
+      }
+      // otherwise,
+      // We want to loop in the adjacency list with smallest being the key
+      for (let neighbor in this.adjacencyList[smallest]) {
+        // create a neighborNode variable to represent current edge we are iterating through in the adjacencyList[smallest] array
+        let neighborNode = this.adjacencyList[smallest][neighbor];
+
+        // create a candidiate variable to hold the calculation of the value of the distance of smallest + the value of nextNode's weight for the edge
+        let candidate = distance[smallest] + neighborNode.weight;
+
+        // if the candidate is less than what the distance[neighborNode's name]
+        if (candidate < distance[neighborNode.node]) {
+          // update the value at distance[neighborNode's name] to equal candidate
+          distance[neighborNode.node] = candidate;
+
+          // update the value at previous[neighborNode's name] to equal the current node we looking at aka smallest
+          previous[neighborNode.node] = smallest;
+
+          // enqueue in priority queue with new priority
+          PQ.enqueue(neighborNode, candidate);
+        }
+      }
+    }
+    console.log('DISTANCE!', distance);
+    console.log('PREVIOUS!', previous);
   }
 }
 
