@@ -28,6 +28,43 @@ class WeightedGraph {
   }
 }
 
+/*
+
+Creating a simple priority queue class
+- has a values property that initializes as an array to represent a queue
+
+enqueue method
+- accepts 2 parameters, a value and a priority
+- pushes an obj made up of the given value and priority arguments onto the values property
+- calls the sort method so the values are sorted in least to greatest
+
+dequeue method
+- shifts off the first element from the valus property and returns it
+
+sort method
+- sorts the values property so its least to greatest
+
+*/
+
+class PriorityQueue {
+  constructor() {
+    this.values = [];
+  }
+
+  enqueue(value, priority) {
+    this.values.push({ value, priority });
+    this.sort();
+  }
+
+  dequeue() {
+    return this.values.shift();
+  }
+
+  sort() {
+    this.values.sort((a, b) => a.priority - b.priority);
+  }
+}
+
 const WG = new WeightedGraph();
 WG.addVertex('A');
 WG.addVertex('B');
