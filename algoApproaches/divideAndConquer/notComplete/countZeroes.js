@@ -1,6 +1,6 @@
 /*
 Question:
-Given an array of 1s and 0s which has all 1s first followed by all 0s, write a function called countZeros, which return the number of zeros in the array
+Given an array of 1s and 0s which has all 1s first followed by all 0s, write a function called countZeroes, which return the number of zeros in the array
 
 Restate:
 create a function that has
@@ -27,7 +27,7 @@ would have a Time Complexity of O(n) since we have a loop that will run as long 
 */
 
 /*
-function countZero(array) {
+function countZeroes(array) {
   // create a variable to hold the counter of how many 0s there are
   let counter = 0;
 
@@ -62,7 +62,7 @@ since that will signal when the zeros start happening
 
 */
 
-function countZero(array) {
+function countZeroes(array) {
   // create 2 pointers that will represent the index of the beginning and the end
   let leftPointer = 0;
   let rightPointer = array.length - 1;
@@ -71,12 +71,13 @@ function countZero(array) {
   while (leftPointer <= rightPointer) {
     // calculate the index of the midpoint
     let midpoint = Math.floor((leftPointer + rightPointer) / 2);
+    console.log('MIDPOINT', midpoint);
 
     // check if the value of the midpoint is equal to 0 && the value at the index to the left of the midpoint is equal to 1
     // if it is checks out,
     if (
-      (array[midpoint] === 0 && array[midpoint - 1] === 1) ||
-      midpoint === 0
+      array[midpoint] === 0 &&
+      (array[midpoint - 1] === 1 || midpoint === 0)
     ) {
       // return the length of the array subtracted by the index of the midpoint since that will let us know how many 0s there are
       return array.length - midpoint;
@@ -108,4 +109,4 @@ Space Complexity: O(1)
 - since we are only creating primitive data type variables, that is constant space O(1)
 */
 
-console.log(countZero([1, 1, 1]));
+console.log(countZero([1, 0, 0, 0, 0]));
