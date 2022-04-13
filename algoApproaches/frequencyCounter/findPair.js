@@ -52,4 +52,13 @@ function findPair(array, target) {
   return false;
 }
 
+/*
+Time Complexity: O(n) linear time
+- since we have a loop that is dependant on the input, as our input grows, our runtime will grow linearly
+- accessing keys and values from a object are O(1)
+
+Space Complexity: O(n)
+- we have a reference data type that is going to grow depending on how big our input is
+*/
+
 console.log(findPair([8, 6, 2, 4, 1, 0, 2, 5, 13], 1));
