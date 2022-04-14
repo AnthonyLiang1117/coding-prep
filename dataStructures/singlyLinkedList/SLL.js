@@ -39,6 +39,20 @@ pop()
 - return the previous tail node
 - Time Complexiry of popping a value off the end of SLL is linear time O(n) since we have to loop based on the size of the SLL
 
+unshift()
+- this function should add a node to the beginning of the singly linked list. It should return the SLL.
+- accepts a value as the value of the node we want to add to the list
+- we can create the new node with the given value
+- check to see if the list is empty
+- if so ,
+- we can assign the head and tail to be the new node
+- other wise,
+- assign the newly created node's next value to be the current head
+- reassign the head to be the newly created node
+- increment the length by 1 since we just inserted a node
+- return the SLL
+
+
 get()
 - this function should find a node at specified index in a SLL. It should return the found node
 - accepts a number which should be the index we want to be
@@ -54,6 +68,19 @@ set()
 - reassign the node's value to be the given value
 - return true
 - Time Complexity is O(n) since we will need to be moving throughout the SLL based on how many items at in it
+
+insert()
+- this function should insert at a specified index in a singly linked list. It should return true if the index is valid, and false if the index is invalid
+- accept an index and a value
+- the index is where the node to should in the SLLL
+- value is what the node's value should hold
+- we want to check if the index provided is within the range of the SLL, if it isnt, return false
+- create a node with the given value
+- we want to grab the node that is right before the index at where we want to place the node
+- we then assign the newly created node's next property to be the grabbed node's next value to ensure that connection
+- reassing the grabbed node's next property to be the newly created node so it is in the right index
+- increment the length by 1 since we added a node in the SLL
+- return true when it is done
 
 */
 
@@ -112,6 +139,21 @@ class SinglyLinkedList {
     return nextNode;
   }
 
+  unshift(value) {
+    let newNode = new Node(value);
+
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+
+    this.length++;
+    return this;
+  }
+
   get(index) {
     if (index < 0 || index > this.length) return null;
 
@@ -135,11 +177,28 @@ class SinglyLinkedList {
 
     return true;
   }
+
+  insert(index, value) {
+    if (index < 0 || index > this.length + 1) return false;
+    if (index === 0) return !!this.unshift(value);
+    if (index === this.length) return !!this.push(value);
+
+    const newNode = new Node(value);
+    const previousNode = this.get(index - 1);
+
+    newNode.next = previousNode.next;
+    previousNode.next = newNode;
+
+    this.length++;
+    return true;
+  }
 }
 
 let SLL = new SinglyLinkedList();
 SLL.push('1');
 SLL.push('2');
-SLL.push('3');
-console.log(SLL.set(1, '1.5'));
+SLL.push('4');
+console.log(SLL.insert(2, '3'));
 console.log(SLL.get(1));
+console.log(SLL.get(2));
+console.log(SLL.get(3));
