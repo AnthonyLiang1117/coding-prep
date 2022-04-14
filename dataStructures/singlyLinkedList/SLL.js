@@ -39,6 +39,13 @@ pop()
 - return the previous tail node
 - Time Complexiry of popping a value off the end of SLL is linear time O(n) since we have to loop based on the size of the SLL
 
+get()
+- this function should find a node at specified index in a SLL. It should return the found node
+- accepts a number which should be the index we want to be
+- we should loop through the array until we get to the specified index
+- return the node at that index
+- the index is not within the ranges of the length of the SLL, return null
+- Time Complexity is O(n) since we will be looping at the worst case all the way through the loop
 
 */
 
@@ -96,13 +103,28 @@ class SinglyLinkedList {
     this.length--;
     return nextNode;
   }
+
+  get(index) {
+    if (index < 0 || index > this.length) return null;
+
+    let currentNode = this.head;
+    let counter = 0;
+
+    while (counter !== index) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+
+    return currentNode;
+  }
 }
 
 let SLL = new SinglyLinkedList();
 SLL.push('1');
 SLL.push('2');
 SLL.push('3');
-console.log(SLL.pop());
-console.log(SLL.pop());
-console.log(SLL.pop());
-console.log(SLL);
+console.log(SLL.get(1));
+// console.log(SLL.get());
+// console.log(SLL.pop());
+// console.log(SLL.pop());
+// console.log(SLL);
