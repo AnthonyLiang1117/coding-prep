@@ -51,7 +51,18 @@ unshift()
 - reassign the head to be the newly created node
 - increment the length by 1 since we just inserted a node
 - return the SLL
+- Time Complexity of adding a node to the beginning of the SLL is constant time O(1) since we are just using the head property from the SLL
 
+shift()
+- this function should remove a node from the beginning of the singly linked list. It should return the removed node
+- check if the SLL is empty, if so, return null
+- put the old head into a variable
+- reassign the head property to equal the current head's next value
+- reassign the old head's next value to be null
+- decrement the length of the SLL
+- if the length now is at 0
+- reassign the head and tail to be null;
+- return the old head
 
 get()
 - this function should find a node at specified index in a SLL. It should return the found node
@@ -81,6 +92,40 @@ insert()
 - reassing the grabbed node's next property to be the newly created node so it is in the right index
 - increment the length by 1 since we added a node in the SLL
 - return true when it is done
+
+remove()
+- this function should insert at a specified index in a singly linked list. It should return the removed node if the index is valid, and false if the index is invalid
+- accepts a index
+- if the index is not within the ranges of the SLL, return false
+- if the index is 0, use shift method
+- if the index is this.length - 1, use pop method
+- we want to grab the node that is right before the given index
+- create a variable to hold the node at the given index
+- assign the right before node's next property to be the removing node 's next value
+- reassign the removing node's next property to be null
+- decrement the length since we just removed a node from the SLL
+- return the removing node
+- Time Complexity O(n) since we have to look through the SLL if the index is not 0 or the last index and depending how large the SLL, it will be dependant on that
+
+rotate()
+- this function should rotate all the nodes in the list by some number passed in.
+- For example, if your list looks like 1 -> 2 -> 3 -> 4 -> 5 and you rotate by 2,
+- the list should be modified to be 3 -> 4 -> 5 -> 1 -> 2. The number passed in to rotate can be any integer
+- so if you wanna rotate it by n, we are making the node at the nth index to be the head so we need to grab the node at n - 1
+- we need a variable to hold the current last variable to connect it with the head to establish the connection
+- the variable that represents n - 1 needs to be the last node in the SLL so it's next value needs to be null
+- the variable that representt n needs to be the first node in the SLL which means it needs to be the head
+
+- first you want to connect the SLL to be circular
+- get to the last node in your SLL or if you have this.tail and assign it's next value to be this.head
+- create a variable to hold what your current head value is
+- create a counter variable to represent the current head's position in the SLL , I did it as 1
+- have a while loop that runs until the counter reaches the given index
+- this makes our currentNode the node we will want our future tail to be
+- and the node that is right before where we want our future head to be
+- you reassign the head property to be the currentNode's next value
+- you reassign the tail property to be the currentNode
+- you reassign the tails' next property to be null so it stops the SLL from being circular
 
 */
 
@@ -154,6 +199,21 @@ class SinglyLinkedList {
     return this;
   }
 
+  shift() {
+    if (!this.head) return null;
+
+    const oldHead = this.head;
+    this.head = oldHead.next;
+    oldHead.next = null;
+
+    this.length--;
+    if (this.length === 0) {
+      this.tail = null;
+    }
+
+    return oldHead;
+  }
+
   get(index) {
     if (index < 0 || index > this.length) return null;
 
@@ -192,13 +252,62 @@ class SinglyLinkedList {
     this.length++;
     return true;
   }
+
+  remove(index) {
+    if (index < 0 || index > this.length) return false;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+
+    let previousNode = this.get(index - 1);
+    let removeNode = previousNode.next;
+
+    previousNode.next = removeNode.next;
+    removeNode.next = null;
+
+    this.length--;
+    return removeNode;
+  }
+
+  rotate(index) {
+    // make sure the index is within the range of the SLL
+    // if the value is positive, we can modulo the value with the length of the SLL to find how much we need to rotate it
+    index = index % this.length;
+
+    // if after we modulo and its back to 0, we do not need to rotate it at all
+    if (index === 0) return;
+
+    // we need the current last value in the SLL so that we can connect the SLL together to make the SLL circular
+    let oldLastNode = this.tail;
+    oldLastNode.next = this.head;
+
+    // grab the current head
+    let currentNode = this.head;
+
+    // create a counter to represent its position
+    let counter = 1;
+
+    // loop until until the currentNode represent the node that is right before where the new node should be
+    while (counter !== index) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+
+    this.head = currentNode.next;
+    this.tail = currentNode;
+    this.tail.next = null;
+  }
 }
 
 let SLL = new SinglyLinkedList();
 SLL.push('1');
 SLL.push('2');
+SLL.push('3');
 SLL.push('4');
-console.log(SLL.insert(2, '3'));
+SLL.push('5');
+SLL.rotate(2);
+
+console.log(SLL.get(0));
 console.log(SLL.get(1));
 console.log(SLL.get(2));
 console.log(SLL.get(3));
+console.log(SLL.get(4));
