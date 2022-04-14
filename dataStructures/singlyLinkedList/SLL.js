@@ -47,6 +47,14 @@ get()
 - the index is not within the ranges of the length of the SLL, return null
 - Time Complexity is O(n) since we will be looping at the worst case all the way through the loop
 
+set()
+- this function should accept an index and a value and update the value of the node in the SLL at the index with the new value.
+- it should return true if the node is updated successfully or false if an invalid index is passed in
+- use get method to get the node at the given index
+- reassign the node's value to be the given value
+- return true
+- Time Complexity is O(n) since we will need to be moving throughout the SLL based on how many items at in it
+
 */
 
 class Node {
@@ -117,14 +125,21 @@ class SinglyLinkedList {
 
     return currentNode;
   }
+
+  set(index, value) {
+    let node = this.get(index);
+
+    if (!node) return false;
+
+    node.value = value;
+
+    return true;
+  }
 }
 
 let SLL = new SinglyLinkedList();
 SLL.push('1');
 SLL.push('2');
 SLL.push('3');
+console.log(SLL.set(1, '1.5'));
 console.log(SLL.get(1));
-// console.log(SLL.get());
-// console.log(SLL.pop());
-// console.log(SLL.pop());
-// console.log(SLL);
