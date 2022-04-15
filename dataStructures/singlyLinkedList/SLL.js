@@ -124,6 +124,20 @@ rotate()
 - you reassign the head property to be the currentNode's next value
 - you reassign the tail property to be the currentNode
 - you reassign the tails' next property to be null so it stops the SLL from being circular
+- Time Complexity: O(n) since in the worst case, we will be looping the full length of the SLL so depending on how big it grows, run time will grow linearly
+
+reverse()
+- this function should reverse the SLL
+- create a variable to hold the head property
+- swap the head and the tail properties
+- initialize previous to be null for now
+- have a for loop through the SLL until the end
+- 13 -> 27 -> 32 -> 71
+we need 27 to point at 13
+- create a next variable to hold the current 's next value
+- assign current's next property to be whatever previous is
+- set previous to be the value of the current
+- set current to be the value of the next variable
 
 */
 
@@ -296,6 +310,27 @@ class SinglyLinkedList {
     this.head = current.next;
     this.tail.next = null;
   }
+
+  reverse() {
+    let current = this.head;
+
+    this.head = this.tail;
+    this.tail = current;
+
+    let previous = null;
+
+    for (let i = 0; i < this.length; i++) {
+      let next = current.next;
+
+      current.next = previous;
+
+      previous = current;
+
+      current = next;
+    }
+
+    return this;
+  }
 }
 
 let SLL = new SinglyLinkedList();
@@ -304,11 +339,4 @@ SLL.push('2');
 SLL.push('3');
 SLL.push('4');
 SLL.push('5');
-SLL.rotate(-1);
-
-console.log(SLL.get(0));
-console.log(SLL.get(1));
-console.log(SLL.get(2));
-console.log(SLL.get(3));
-console.log(SLL.get(4));
-console.log(SLL);
+console.log(SLL.reverse());
