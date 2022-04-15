@@ -69,7 +69,7 @@ BFS()
 - Time Complexity is linear time O(n) since we will be looping through entire BST based on the number of nodes in the BST
 - Space Complexity is linear space O(n) since we will have an array based on how many nodes at in the BST
 
-DFSPreOrder ()
+DFSPreOrder()
 - this function should search through each node in the binary search tree using pre-order depth first search and return an array containging each node's value
 - with pre order, you want to process itself first, then its left side then its right side
 - will be using a traverse helper function to traverse through BST
@@ -81,6 +81,16 @@ DFSPreOrder ()
 - since we want to process right side last, if they have a right child, we call the traverse helper fucntion with the right child
 - invoke the helper function with the current node
 - return the values array
+
+DFSPostOrder()
+- with post order, we want to process the left side first, then the right side and then itself
+- we want to create an array to hold the values from the nodes in the BST
+- create a traverse helper function that accepts a node
+- checks to see if the given node has a left child and calls the helper function on the left child
+- checks to see if the given node has a right child and calls the helper function on the right child
+- process the node itself
+- invokes the helper function with the root node since thats where we want to start
+- returns the values array
 
 */
 
@@ -185,6 +195,22 @@ class BinarySearchTree {
 
     return values;
   }
+
+  DFSPostOrder() {
+    let values = [];
+
+    const traverse = (node) => {
+      if (node.left) traverse(node.left);
+
+      if (node.right) traverse(node.right);
+
+      values.push(node.value);
+    };
+
+    traverse(this.root);
+
+    return values;
+  }
 }
 
 const BST = new BinarySearchTree();
@@ -196,4 +222,4 @@ BST.insert(1);
 BST.insert(5);
 BST.insert(50);
 
-console.log(BST.DFSPreOrder());
+console.log(BST.DFSPostOrder());
