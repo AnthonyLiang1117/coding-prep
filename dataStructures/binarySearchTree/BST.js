@@ -92,6 +92,16 @@ DFSPostOrder()
 - invokes the helper function with the root node since thats where we want to start
 - returns the values array
 
+DFSInOrder()
+- with in order, we want to process the left side of a node first, itself second and the right side of a node last
+- we will create an array to hold the values of each node in the BST
+- create a helper function to help us traverse the tree that accepts a node
+- if the node has a left child, process that side first
+- process the node itself 2nd
+- if the node has a right child, process that side last
+- invoke the helper function with the node we want to start with which is the root
+- return the values array
+
 */
 
 class Node {
@@ -197,7 +207,7 @@ class BinarySearchTree {
   }
 
   DFSPostOrder() {
-    let values = [];
+    const values = [];
 
     const traverse = (node) => {
       if (node.left) traverse(node.left);
@@ -205,6 +215,22 @@ class BinarySearchTree {
       if (node.right) traverse(node.right);
 
       values.push(node.value);
+    };
+
+    traverse(this.root);
+
+    return values;
+  }
+
+  DFSInOrder() {
+    const values = [];
+
+    const traverse = (node) => {
+      if (node.left) traverse(node.left);
+
+      values.push(node.value);
+
+      if (node.right) traverse(node.right);
     };
 
     traverse(this.root);
@@ -222,4 +248,4 @@ BST.insert(1);
 BST.insert(5);
 BST.insert(50);
 
-console.log(BST.DFSPostOrder());
+console.log(BST.DFSInOrder());
