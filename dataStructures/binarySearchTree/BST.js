@@ -32,7 +32,26 @@ insert()
 - return the binary search tree
 - if it has a right child,
 - we need to reassign the current node to be the current node's right child
+- Time Complexity for Insert is O(log n) since we have loop that will run at worst case through the entire tree but we cut the tree in half every time we traverse
 
+find()
+- this function should find a node in a binary tree. It should return the node if found, otherwise return undefined
+- accepts a value and trys to find if the given value is inside the BST
+- we will check if the BST is empty
+- if so, we can immediately return undefined
+- we want to create a variable to represent which node we will be comparing with vs the given value
+- have a while loop that runs true
+- compare if the given value is equal to the current node
+- if so, return the node
+- if the value is less than the node
+- check if the current node has a left child
+- if not, return undefined since we reached the end of this side of the BST
+- if so, reassign the current node to be the current node's left child
+- if the value is greater than the node
+- check if the current node has a right child
+- if not, return undefiend since we reach the end of this side of the BST
+- if so, reassign the current node to be the current node's right child
+- Time complexity O(log n) since we have to loop through the BST but we divide the amount of nodes in half as we loop through
 
 */
 
@@ -77,10 +96,33 @@ class BinarySearchTree {
       }
     }
   }
+
+  find(value) {
+    if (!this.root) return undefined;
+
+    let currentNode = this.root;
+
+    while (true) {
+      if (value === currentNode.value) return currentNode;
+
+      if (value < currentNode.value) {
+        if (!currentNode.left) {
+          return undefined;
+        }
+        currentNode = currentNode.left;
+      } else if (value > currentNode.value) {
+        if (!currentNode.right) {
+          return undefined;
+        }
+        currentNode = currentNode.right;
+      }
+    }
+  }
 }
 
 const BST = new BinarySearchTree();
-console.log(BST.insert(15));
-console.log(BST.insert(20));
-console.log(BST.insert(10));
-console.log(BST.insert(12));
+BST.insert(15);
+BST.insert(20);
+BST.insert(10);
+BST.insert(12);
+console.log(BST.find(43));
