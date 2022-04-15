@@ -112,9 +112,7 @@ rotate()
 - For example, if your list looks like 1 -> 2 -> 3 -> 4 -> 5 and you rotate by 2,
 - the list should be modified to be 3 -> 4 -> 5 -> 1 -> 2. The number passed in to rotate can be any integer
 - so if you wanna rotate it by n, we are making the node at the nth index to be the head so we need to grab the node at n - 1
-- we need a variable to hold the current last variable to connect it with the head to establish the connection
-- the variable that represents n - 1 needs to be the last node in the SLL so it's next value needs to be null
-- the variable that representt n needs to be the first node in the SLL which means it needs to be the head
+- we need a variable to hold the current last variable to connect it with the head to establish the connection;
 
 - first you want to connect the SLL to be circular
 - get to the last node in your SLL or if you have this.tail and assign it's next value to be this.head
@@ -269,31 +267,33 @@ class SinglyLinkedList {
   }
 
   rotate(index) {
-    // make sure the index is within the range of the SLL
-    // if the value is positive, we can modulo the value with the length of the SLL to find how much we need to rotate it
+    // make sure you have these 3 things checked off for rotated
+    // you need to make your SLL circular
+    // you need to grab the node right before where your index wants you to rotate it
+    // reassign the head and tail
+
+    // we need to modulo it so its within the range of our SLL
     index = index % this.length;
 
-    // if after we modulo and its back to 0, we do not need to rotate it at all
+    // if number is negative, we need to add it to the length in order to be a left rotation
+    if (index < 0) index = this.length + index;
+
     if (index === 0) return;
 
-    // we need the current last value in the SLL so that we can connect the SLL together to make the SLL circular
-    let oldLastNode = this.tail;
-    oldLastNode.next = this.head;
+    const oldTail = this.tail;
+    oldTail.next = this.head;
 
-    // grab the current head
-    let currentNode = this.head;
-
-    // create a counter to represent its position
+    let current = this.head;
     let counter = 1;
 
-    // loop until until the currentNode represent the node that is right before where the new node should be
+    // iterates until current is the node that is right before where our index wants to rotate
     while (counter !== index) {
-      currentNode = currentNode.next;
+      current = current.next;
       counter++;
     }
 
-    this.head = currentNode.next;
-    this.tail = currentNode;
+    this.tail = current;
+    this.head = current.next;
     this.tail.next = null;
   }
 }
@@ -304,10 +304,11 @@ SLL.push('2');
 SLL.push('3');
 SLL.push('4');
 SLL.push('5');
-SLL.rotate(2);
+SLL.rotate(-1);
 
 console.log(SLL.get(0));
 console.log(SLL.get(1));
 console.log(SLL.get(2));
 console.log(SLL.get(3));
 console.log(SLL.get(4));
+console.log(SLL);
