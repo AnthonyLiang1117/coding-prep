@@ -29,6 +29,37 @@ bubbleUp()
 - reassign the parentIndex to keep the loop going
 - once we are out of the loop, return the MBH
 
+remove()
+- in MBH, when we are removing a node, we are normally removing the root node in a binary heap
+- we swap the values of the root and the last element in the MBH
+- pop off the last item in the values property ( which is now the old root of the MBH)
+- check to see if there is still values left in the MBH,
+- if so, run sinkDown()
+- return the MBH
+
+sinkDown()
+- grab the index of the first element now that it is out of place
+- create a variable for the value of the first element
+- create a length variable to hold the value of the length
+- have a while loop that runs true
+- find the index of the left and right children
+- initialize left and right child variable to later hold the values at left and right index
+- create a swap variable to initialize as null to see if we end of swapping this iteration or not
+- check if the left index is within bounds of values property
+- if so,
+- assign the left child variable the value at the left index
+- check if the current value is less than the left value
+- if so,
+- reassign swap to be left index;
+- check if the right index is within bounds of values property
+- if so,
+- assign the right child variable the value at the right index
+- check if we did not swap AND the current value is less than the right value OR if we did swap AND the left value is less than right value
+- rassign swap to be right index;
+- if swap is still null, we break out of the loop since the number is where it should be
+- swap the current index with swap index
+- reassign current index to be swap
+
 */
 
 class MaxBinaryHeap {
@@ -59,13 +90,78 @@ class MaxBinaryHeap {
       parentIndex = Math.floor((currentIndex - 1) / 2);
     }
   }
+
+  remove() {
+    const swap = (array, idx1, idx2) => {
+      [array[idx1], array[idx2]] = [array[idx2], array[idx1]];
+    };
+
+    swap(this.values, 0, this.values.length - 1);
+
+    const removeNode = this.values.pop();
+
+    if (this.values.length > 0) {
+      this.sinkDown();
+    }
+
+    console.log('REMOVED NODE', removeNode);
+    return this;
+  }
+
+  sinkDown() {
+    const swap = (array, idx1, idx2) => {
+      [array[idx1], array[idx2]] = [array[idx2], array[idx1]];
+    };
+
+    let currentIndex = 0;
+    const current = this.values[currentIndex];
+    const length = this.values.length;
+
+    while (true) {
+      const leftIndex = 2 * currentIndex + 1;
+      const rightIndex = 2 * currentIndex + 2;
+
+      let left;
+      let right;
+      let swapIndex = null;
+
+      if (leftIndex < length) {
+        left = this.values[leftIndex];
+
+        if (current < left) {
+          swapIndex = leftIndex;
+        }
+      }
+
+      if (rightIndex < length) {
+        right = this.values[rightIndex];
+
+        if ((!swapIndex && current < right) || (swapIndex && left < right)) {
+          swapIndex = rightIndex;
+        }
+      }
+
+      if (!swapIndex) break;
+
+      swap(this.values, currentIndex, swapIndex);
+
+      currentIndex = swapIndex;
+    }
+  }
 }
 
 const MBH = new MaxBinaryHeap();
 
-console.log(MBH.insert(1));
-console.log(MBH.insert(2));
-console.log(MBH.insert(3));
-console.log(MBH.insert(4));
-console.log(MBH.insert(5));
-console.log(MBH.insert(6));
+MBH.insert(1);
+MBH.insert(2);
+MBH.insert(3);
+MBH.insert(4);
+MBH.insert(5);
+MBH.insert(6);
+
+console.log(MBH.remove());
+console.log(MBH.remove());
+console.log(MBH.remove());
+console.log(MBH.remove());
+console.log(MBH.remove());
+console.log(MBH.remove());
