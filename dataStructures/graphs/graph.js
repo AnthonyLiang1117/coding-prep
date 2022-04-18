@@ -34,6 +34,13 @@ removeEdge()
 - use the array.filter method to remove the 1st vertex out of the array
   - creates a new array so we need to reassign the key to have the new value
 
+removeVertex()
+- accepts a vertex and removes it from graph
+- sicne we need to remove both the connections that the vertex has and the vertex itself
+- we can remove the connections by looping through the adjacency list object
+- use removeEdge function on the current key we are at with the given vertex
+- we can then delete the key from thE adjacency list object to remove the vertex
+
 */
 
 class Graph {
@@ -65,6 +72,16 @@ class Graph {
       );
     }
   }
+
+  removeVertex(vertex) {
+    for (let otherVertex in this.adjacencyList) {
+      if (otherVertex !== vertex) {
+        this.removeEdge(otherVertex, vertex);
+      }
+    }
+
+    delete this.adjacencyList[vertex];
+  }
 }
 
 let graph = new Graph();
@@ -79,7 +96,7 @@ graph.addEdge('A', 'C');
 graph.addEdge('B', 'D');
 graph.addEdge('C', 'D');
 
-graph.removeEdge('B', 'A');
-graph.removeEdge('C', 'D');
+graph.removeVertex('C');
+graph.removeVertex('B');
 
 console.log(graph);
