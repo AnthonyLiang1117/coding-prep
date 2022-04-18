@@ -41,6 +41,36 @@ removeVertex()
 - use removeEdge function on the current key we are at with the given vertex
 - we can then delete the key from thE adjacency list object to remove the vertex
 
+depthFirstSearch()
+- depth first priorizites visiting childing of a node before we visit siblings / deepen the traversal before widing it
+- this function should return an array of nodes visited using DFS. You can do this iteratively (using a stack) or recrusively
+- accepts a vertex for where to start the DFS
+- will be doing this iteratively with a stack (last in first out)
+- create stack variable to keep track of which vertices we still need to process with the given vertex in it
+- create a visited obj variable to keep track of the vertices we have already visited with a key value pair with given vertex
+- create an array to store all the vertices to return later
+- have a while loop that runs while there is something in our stack
+- pop off the value from the stack
+- if the value has not been marked as visited yet
+- mark it as visited in our visited obj
+- push the value onto our return array
+- push all of the vertices that have a connection with the current vertex we are looking at onto the stack
+- return the results array
+
+breadthFirstSearch()
+- priorizitze visiting all the neighbors at a given depth before moving downwards
+- accepts a startingVertex
+- create a return array to hold all the vertices from the graph
+- create a visited obj variable to keep track of the vertices we have visited already
+- create a queue (FIFO) to keep track of which vertices we still need to process and add the startingVertex into it
+- mark the startingvertex as visited
+- have a loop that runs while there something in the queue
+- remove the first item from the queue and push it onto the return array
+- loop through the value at the currentVertex key in adjacency list
+- if any of the vertices are not visited yet
+- mark them as visited
+- push them onto the queue
+
 */
 
 class Graph {
@@ -82,21 +112,45 @@ class Graph {
 
     delete this.adjacencyList[vertex];
   }
+
+  DFS(startingVertex) {
+    const vertices = [];
+    const visited = {};
+    const stack = [startingVertex];
+
+    while (stack.length) {
+      const currentVertex = stack.pop();
+
+      if (!visited[currentVertex]) {
+        visited[currentVertex] = true;
+
+        vertices.push(currentVertex);
+
+        this.adjacencyList[currentVertex].forEach((vertex) => {
+          if (!visited[vertex]) stack.push(vertex);
+        });
+      }
+    }
+
+    return vertices;
+  }
 }
 
-let graph = new Graph();
+const graph = new Graph();
 
 graph.addVertex('A');
 graph.addVertex('B');
 graph.addVertex('C');
 graph.addVertex('D');
+graph.addVertex('E');
+graph.addVertex('F');
 
 graph.addEdge('A', 'B');
 graph.addEdge('A', 'C');
 graph.addEdge('B', 'D');
-graph.addEdge('C', 'D');
+graph.addEdge('C', 'E');
+graph.addEdge('D', 'E');
+graph.addEdge('D', 'F');
+graph.addEdge('E', 'F');
 
-graph.removeVertex('C');
-graph.removeVertex('B');
-
-console.log(graph);
+console.log(graph.BFS('A'));
