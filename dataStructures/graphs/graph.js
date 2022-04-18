@@ -134,6 +134,29 @@ class Graph {
 
     return vertices;
   }
+
+  BFS(startingVertex) {
+    const vertices = [];
+    const visited = {};
+    const queue = [startingVertex];
+
+    visited[startingVertex] = true;
+
+    while (queue.length) {
+      const currentVertex = queue.shift();
+
+      vertices.push(currentVertex);
+
+      this.adjacencyList[currentVertex].forEach((vertex) => {
+        if (!visited[vertex]) {
+          visited[vertex] = true;
+          queue.push(vertex);
+        }
+      });
+    }
+
+    return vertices;
+  }
 }
 
 const graph = new Graph();
