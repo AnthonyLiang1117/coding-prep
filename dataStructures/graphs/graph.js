@@ -14,7 +14,7 @@ addVertex()
 - if not,
 - initialize the given name as a key in the adjacency list with a value of an array to store the edges later
 
-addEdege()
+addEdge()
 - accepts 2 vertices and adds an edge between the 2 vertices
 - checks to see if there is a key with the first vertex
 - if so,
@@ -22,6 +22,17 @@ addEdege()
 - checks to see if there is a key with the 2nd vertex
 - if som
 - push the 1st vertex onto the array at the key of second vertex
+
+removeEdge()
+- accepts 2 vertices and remove the edge between them.
+- it shoudl modify the adjacency list to ensure that both values are not in each array for the two nodes which no longer tain the edge
+- check to see if there is a key with the first vertex
+- if so,
+- use the array.filter method to remove the 2nd vertex out of the array
+- check to see if there is a key with the 2nd vertex
+- if som
+- use the array.filter method to remove the 1st vertex out of the array
+  - creates a new array so we need to reassign the key to have the new value
 
 */
 
@@ -40,6 +51,20 @@ class Graph {
     if (this.adjacencyList[vertex1]) this.adjacencyList[vertex1].push(vertex2);
     if (this.adjacencyList[vertex2]) this.adjacencyList[vertex2].push(vertex1);
   }
+
+  removeEdge(vertex1, vertex2) {
+    if (this.adjacencyList[vertex1]) {
+      this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(
+        (vertex) => vertex !== vertex2
+      );
+    }
+
+    if (this.adjacencyList[vertex2]) {
+      this.adjacencyList[vertex2] = this.adjacencyList[vertex2].filter(
+        (vertex) => vertex !== vertex1
+      );
+    }
+  }
 }
 
 let graph = new Graph();
@@ -53,5 +78,8 @@ graph.addEdge('A', 'B');
 graph.addEdge('A', 'C');
 graph.addEdge('B', 'D');
 graph.addEdge('C', 'D');
+
+graph.removeEdge('B', 'A');
+graph.removeEdge('C', 'D');
 
 console.log(graph);
